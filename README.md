@@ -4,7 +4,7 @@ A small FastAPI application that reports image metadata for JPEG and PNG uploads
 
 ## Development
 
-Requires Python 3.12+ and [uv](https://docs.astral.sh/uv/).
+Requires Python 3.14 and [uv](https://docs.astral.sh/uv/).
 
 ```sh
 uv sync --locked

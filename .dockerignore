@@ -11,3 +11,13 @@ __pycache__/
 Dockerfile*
 docker-compose*
 README.md
+tests/
+scripts/
+docs/
+gitops-template/
+build/
+dist/
+reports/
+.coverage*
+coverage.xml
+htmlcov/
