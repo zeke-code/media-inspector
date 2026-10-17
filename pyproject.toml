@@ -10,3 +10,8 @@ dependencies = [
 
 [tool.fastapi]
 entrypoint = "src.app.main:app"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.17.1",
+]

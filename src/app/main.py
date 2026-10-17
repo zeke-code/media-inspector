@@ -1,10 +1,9 @@
 import time
-import logging
 
-from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi import FastAPI, HTTPException, UploadFile
 from PIL import Image, UnidentifiedImageError
-from .models import ImageProperties
 
+from .models import ImageProperties
 
 app = FastAPI()
 
@@ -12,6 +11,7 @@ app = FastAPI()
 @app.get("/health")
 async def health():
     return {"status": "ok"}
+
 
 @app.post("/analyze")
 async def analyze_image(file: UploadFile):
@@ -23,22 +23,15 @@ async def analyze_image(file: UploadFile):
     try:
         image = Image.open(file.file)
     except UnidentifiedImageError:
-        raise HTTPException(
-            status_code=422,
-            detail="Unsupported file type"
-        )
+        raise HTTPException(status_code=422, detail="Unsupported file type")
 
     if image.width * image.height >= MAX_PIXELS:
         raise HTTPException(
-            status_code=422,
-            detail="Image must be smaller than 20 megapixels"
+            status_code=422, detail="Image must be smaller than 20 megapixels"
         )
 
     if file.size >= MAX_BYTES:
-        raise HTTPException(
-            status_code=413,
-            detail="Image must be smaller than 5 MB"
-        )
+        raise HTTPException(status_code=413, detail="Image must be smaller than 5 MB")
 
     return ImageProperties(
         format=image.format,
@@ -46,8 +39,5 @@ async def analyze_image(file: UploadFile):
         height=image.height,
         size_bytes=file.size,
         mode=image.mode,
-        processing_ms=round(
-            (time.perf_counter() - start) * 1000, 2
-        )
-    
+        processing_ms=round((time.perf_counter() - start) * 1000, 2),
     )
