@@ -41,4 +41,4 @@ USER appuser
 
 EXPOSE 8080
 
-CMD ["fastapi", "run", "src/app/main.py", "--host", "0.0.0.0", "--port", "8080", "--proxy-headers"]
+CMD ["fastapi", "run", "--host", "0.0.0.0", "--port", "8080", "--proxy-headers"]

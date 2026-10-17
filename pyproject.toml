@@ -9,9 +9,33 @@ dependencies = [
 ]
 
 [tool.fastapi]
-entrypoint = "src.app.main:app"
+entrypoint = "app.main:app"
+
+[build-system]
+requires = ["uv_build>=0.13.1,<0.14"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "app"
 
 [dependency-groups]
 dev = [
+    "httpx2",
+    "pytest>=8.4",
+    "pytest-cov>=6.2",
     "ruff>=0.17.1",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--import-mode=importlib"
+
+[tool.coverage.run]
+source = ["app"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.ruff.lint]
+extend-select = ["I"]
