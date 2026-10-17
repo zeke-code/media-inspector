@@ -5,6 +5,7 @@ requires-python = ">=3.12"
 dependencies = [
     "fastapi[standard]>=0.143.3",
     "pillow>=13.0.0",
+    "python-multipart>=0.0.32",
 ]
 
 [tool.fastapi]
